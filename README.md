@@ -1,251 +1,147 @@
-# NatHacks Assistive Mirror# NatHacks Assistive Mirror
+# Mirra Call Assistive Mirror
 
-Raspberry Pi smart mirror that guides morning routines with on-device computer vision and optional Google Cloud Vision assist. Built for <150ms capture→overlay latency while keeping the UX senior-friendly.Raspberry Pi smart mirror that guides morning routines with on-device computer vision and optional Google Cloud Vision assist. Built for <150ms capture→overlay latency while keeping the UX senior-friendly.
+An AI-powered assistive smart mirror designed to guide rehabilitation exercises and daily routines using real-time computer vision, pose estimation, and AR overlays.
 
-## Quick Start## Quick Start
+Built with FastAPI, React, MediaPipe, and Raspberry Pi, the system provides low-latency visual guidance through on-device processing with optional Google Cloud Vision support.
 
-### 1. Backend Setup### 1. Backend Setup
+The project was designed with accessibility and senior-friendly interaction in mind, focusing on real-time feedback, fullscreen usability, and lightweight deployment on Raspberry Pi hardware.
 
-`bash`bash
+---
 
-python -m venv .venvpython -m venv .venv
+# ✨ Features
 
-source .venv/bin/activatesource .venv/bin/activate
+- Real-time pose and hand tracking using MediaPipe
+- AR overlays for guided routines and movement feedback
+- FastAPI backend with WebSocket communication
+- React + TypeScript frontend with Canvas overlays
+- Raspberry Pi + MagicMirror integration
+- Senior-friendly fullscreen interface
+- Low-latency real-time processing pipeline
+- Configurable routine and task system
 
-pip install -r backend/requirements.txtpip install -r backend/requirements.txt
+---
 
-uvicorn backend.app:app --host 0.0.0.0 --port 8000uvicorn backend.app:app --host 0.0.0.0 --port 8000
+# 🛠️ Tech Stack
 
-````
+## Frontend
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript)
+![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite)
+![TailwindCSS](https://img.shields.io/badge/TailwindCSS-38B2AC?style=for-the-badge&logo=tailwind-css)
 
+## Backend
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python)
+![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi)
+![OpenCV](https://img.shields.io/badge/OpenCV-5C3EE8?style=for-the-badge&logo=opencv)
+![MediaPipe](https://img.shields.io/badge/MediaPipe-FF6F00?style=for-the-badge)
 
+## Infrastructure / Hardware
+![Raspberry Pi](https://img.shields.io/badge/RaspberryPi-C51A4A?style=for-the-badge&logo=raspberry-pi)
+![MagicMirror](https://img.shields.io/badge/MagicMirror-111111?style=for-the-badge)
+![WebSockets](https://img.shields.io/badge/WebSockets-010101?style=for-the-badge)
 
-### 2. Frontend Build### 2. Frontend Build
+  ---
 
-```bash```bash
+   # 🧠 Architecture
 
-cd frontendcd frontend
+```
+Camera Feed
+   ↓
+Vision Pipeline (MediaPipe/OpenCV)
+   ↓
+FastAPI Backend
+   ↓ WebSocket
+React Overlay UI
+   ↓
+MagicMirror Display
+```
 
-npm installnpm install
+---
 
-npm run build:mmnpm run build:mm
+# 🚀 Quick Start
 
-````
+## Backend Setup
 
-### 3. MagicMirror Setup### 3. MagicMirror Setup
+Create virtual environment:
 
-`bash`bash
+```bash
+python -m venv .venv
+```
 
-cd mirrorcd mirror
+Activate environment:
 
-npm installnpm install
+### Windows
 
-npm startnpm start
+```bash
+.venv\Scripts\activate
+```
 
-````
+### Mac/Linux
 
+```bash
+source .venv/bin/activate
+```
 
+### 1. Install Backend Dependencies 
 
-## Architecture## Architecture
+```
+pip install -r backend/requirements.txt
+```
+Note: Some additional dependencies are required for the backend to run successfully and are not currently included in the original requirements file.
 
+Install them manually:
+```
+pip install google-cloud-aiplatform
+pip install google-cloud-speech
+pip install google-cloud-texttospeech
+pip install pydub
+pip install python-multipart
+```
 
+### 2. Start Backend Server
 
-- **Backend (FastAPI)**: Computer vision pipeline, WebSocket broadcasting, REST API- **Backend (FastAPI)**: Computer vision pipeline, WebSocket broadcasting, REST API
+```
+uvicorn backend.app:app --host 0.0.0.0 --port 8000 --reload
+```
 
-- **Frontend (React)**: TypeScript SPA with camera access and AR overlays- **Frontend (React)**: TypeScript SPA with camera access and AR overlays
+## 💻 Frontend Setup
 
-- **MagicMirror Module**: Iframe wrapper that embeds the React app- **MagicMirror Module**: Iframe wrapper that embeds the React app
+### 3. Install Frontend Dependencies
 
+```
+npm install
+```
 
+### 4. Start Frontend
 
-## Key Components## Key Components
+```
+npm run dev
+```
 
+## 🪞 MagicMirror Setup
 
+### 5. Install MagicMirror Module
 
-### Backend (`backend/`)### Backend (`backend/`)
+```
+cd modules/MMM-AssistiveCoach
+npm install
+```
 
-- `app.py` - FastAPI server with WebSocket and REST endpoints- `app.py` - FastAPI server with WebSocket and REST endpoints
+### 6. Start MagicMirror
 
-- `vision_pipeline.py` - MediaPipe face/hands processing with cloud fallback- `vision_pipeline.py` - MediaPipe face/hands processing with cloud fallback
+```
+npm start
+```
 
-- `cloud_vision.py` - Google Cloud Vision client with rate limiting- `cloud_vision.py` - Google Cloud Vision client with rate limiting
+---
 
-- `task_system.py` - Guided routine management- `task_system.py` - Guided routine management
+# 📄 License
 
+MIT
 
 
-### Frontend (`frontend/`)### Frontend (`frontend/`)
 
-- React + TypeScript + Vite + Tailwind CSS- React + TypeScript + Vite + Tailwind CSS
 
-- Camera access with getUserMedia- Camera access with getUserMedia
 
-- Canvas 2D overlays (rings, text, progress bars)- Canvas 2D overlays (rings, text, progress bars)
 
-- WebSocket connection to backend- WebSocket connection to backend
 
-
-
-### MagicMirror (`modules/MMM-AssistiveCoach/`)### MagicMirror (`modules/MMM-AssistiveCoach/`)
-
-- Iframe wrapper for React SPA- Iframe wrapper for React SPA
-
-- Configuration injection- Configuration injection
-
-- Camera/microphone permissions- Camera/microphone permissions
-
-
-
-## API Endpoints## API Endpoints
-
-
-
-### REST### REST
-
-- `GET /health` - System status (camera, FPS, pose availability)- `GET /health` - System status (camera, FPS, pose availability)
-
-- `POST /settings` - Configure vision pipeline- `POST /settings` - Configure vision pipeline
-
-- `POST /overlay` - Send overlay commands- `POST /overlay` - Send overlay commands
-
-- `POST /session/start` - Begin guided routine- `POST /session/start` - Begin guided routine
-
-
-
-### WebSocket### WebSocket
-
-- `ws://localhost:8000/ws` - Real-time overlay updates- `ws://localhost:8000/ws` - Real-time overlay updates
-
-
-
-## Configuration## Configuration
-
-
-
-### Backend Settings### Backend Settings
-
-```json```json
-
-{{
-
-  "aruco": true,  "aruco": true,
-
-  "pose": true,  "pose": true,
-
-  "overlay_from_aruco": true,  "overlay_from_aruco": true,
-
-  "aruco_stride": 2,  "aruco_stride": 2,
-
-  "detect_scale": 0.75,  "detect_scale": 0.75,
-
-  "reduce_motion": false  "reduce_motion": false
-
-}}
-
-````
-
-### MagicMirror Config### MagicMirror Config
-
-`javascript`javascript
-
-{{
-
-module: "MMM-AssistiveCoach", module: "MMM-AssistiveCoach",
-
-position: "fullscreen_above", position: "fullscreen_above",
-
-config: { config: {
-
-    wsUrl: "ws://127.0.0.1:8000/ws",    wsUrl: "ws://127.0.0.1:8000/ws",
-
-    apiBase: "http://127.0.0.1:8000",    apiBase: "http://127.0.0.1:8000",
-
-    reduceMotion: false,    reduceMotion: false,
-
-    showHints: true    showHints: true
-
-} }
-
-}}
-
-````
-
-
-
-## Development## Development
-
-
-
-### Testing### Testing
-
-```bash```bash
-
-# Backend tests# Backend tests
-
-python -m pytest backend/testspython -m pytest backend/tests
-
-
-
-# Vision pipeline test# Vision pipeline test
-
-python backend/vision_pipeline.pypython backend/vision_pipeline.py
-
-
-
-# MagicMirror test# MagicMirror test
-
-cd mirror && npm startcd mirror && npm start
-
-````
-
-### Camera Calibration### Camera Calibration
-
-`bash`bash
-
-python scripts/calibrate_cam.pypython scripts/calibrate_cam.py
-
-````
-
-
-
-### AR Marker Generation### AR Marker Generation
-
-```bash```bash
-
-python scripts/gen_aruco.pypython scripts/gen_aruco.py
-
-````
-
-## Troubleshooting## Troubleshooting
-
-### Common Issues### Common Issues
-
-1. **Camera not working**: Check `/dev/video0` permissions1. **Camera not working**: Check `/dev/video0` permissions
-
-2. **WebSocket connection failed**: Verify backend is running on port 80002. **WebSocket connection failed**: Verify backend is running on port 8000
-
-3. **MagicMirror not loading**: Run `npm run build:mm` in frontend directory3. **MagicMirror not loading**: Run `npm run build:mm` in frontend directory
-
-4. **Overlays not showing**: Check WebSocket messages in browser dev tools4. **Overlays not showing**: Check WebSocket messages in browser dev tools
-
-### Logs### Logs
-
-- Backend: `backend.log`- Backend: `backend.log`
-
-- Latency metrics: `logs/latency.csv`- Latency metrics: `logs/latency.csv`
-
-- MagicMirror: Check console in Electron dev tools- MagicMirror: Check console in Electron dev tools
-
-## Hardware Requirements## Hardware Requirements
-
-- Raspberry Pi 4+ (8GB RAM recommended)- Raspberry Pi 4+ (8GB RAM recommended)
-
-- Camera module (Pi Camera or USB webcam)- Camera module (Pi Camera or USB webcam)
-
-- Monitor/TV for display- Monitor/TV for display
-
-- Optional: Google Cloud Vision credentials for enhanced accuracy- Optional: Google Cloud Vision credentials for enhanced accuracy
-
-## License## License
-
-MITMIT

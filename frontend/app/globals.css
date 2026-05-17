@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 *,
@@ -33,6 +33,8 @@ body {
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   line-height: 1.4;
+  background-color: white !important;
+  color: #111827 !important;
 }
 
 main {
@@ -49,4 +51,15 @@ button:focus-visible,
 ::selection {
   background: hsla(var(--healthcare-accent-hsl), 0.3);
   color: hsl(var(--text-primary-hsl));
+}
+
+/* body {
+  background-color: white !important;
+  color: #111827 !important;
+} */
+
+main,
+section,
+div {
+  background-color: transparent;
 }

@@ -1,0 +1,23 @@
+:root {
+  --surface-base-hsl: 0 0% 100%;
+  --text-primary-hsl: 222 47% 11%;
+  --focus-ring-hsl: 221 83% 53%;
+  --healthcare-accent-hsl: 221 83% 53%;
+
+  --background: 0 0% 100%;
+  --foreground: 222 47% 11%;
+  --card: 0 0% 100%;
+  --card-foreground: 222 47% 11%;
+  --primary: 222 47% 11%;
+  --primary-foreground: 210 40% 98%;
+  --secondary: 210 40% 96%;
+  --secondary-foreground: 222 47% 11%;
+  --muted: 210 40% 96%;
+  --muted-foreground: 215 16% 47%;
+  --accent: 210 40% 96%;
+  --accent-foreground: 222 47% 11%;
+  --border: 214 32% 91%;
+  --input: 214 32% 91%;
+  --ring: 222 84% 5%;
+  --radius: 0.5rem;
+}
